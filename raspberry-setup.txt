@@ -1,0 +1,20 @@
+adduser ansible
+visudo
+apt-get upgrade
+apt-get install ansible vim wget unzip git
+
+# Set up ansible keys locally
+su ansible
+git clone https://github.com/jonaseicher/ansible.git
+cd ~/.ssh
+ssh-keygen -t rsa
+cat id_rsa.pub >> authorized_keys
+
+# Set up groovy
+curl -s get.gvmtool.net | bash
+source "/root/.sdkman/bin/sdkman-init.sh"
+sdk help
+sdk list
+gvm install groovy
+sdk install crash
+
