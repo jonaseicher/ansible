@@ -5,10 +5,28 @@ apt-get install ansible vim wget unzip git
 
 # Set up ansible keys locally
 su ansible
-git clone https://github.com/jonaseicher/ansible.git
 cd ~/.ssh
 ssh-keygen -t rsa
 cat id_rsa.pub >> authorized_keys
+# Start SSH Agent in background and add default key
+eval `ssh-agent -s`
+ssh-add
+
+# Add key on Github (manually)
+# Either clone directly via ssh:
+# Add this to ~/.ssh/config:
+ Host github.com
+   Hostname ssh.github.com
+   Port 443
+# Test:
+ssh -T git@github.com
+# Then clone via ssh:
+git clone git@github.com:jonaseicher/ansible.git
+# Or clone from https
+git clone https://github.com/jonaseicher/ansible.git
+# To change the origin configuration later, just change the repo address using:
+git remote set-url origin git@github.com:jonaseicher/ansible.git
+# Or go to the .git/config file and change it directly (not shown)
 
 # Set up groovy
 curl -s get.gvmtool.net | bash
