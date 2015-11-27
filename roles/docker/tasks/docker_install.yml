@@ -1,0 +1,15 @@
+- name: add docker repository key
+  sudo: yes
+  shell: curl https://get.docker.io/gpg | apt-key add -
+
+- name: add docker repository
+  sudo: yes
+  shell: echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list
+
+- name: update apt
+  apt: update_cache=yes
+  sudo: yes
+
+- name: install docker
+  apt: pkg=lxc-docker state=installed
+  sudo: yes
